@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <input type="number" id="sqft" placeholder="Square Footage"><br>
+  <input type="radio" id="sr" name="ct">
+  <label for="sr">Standard Residential</label><br>
+  <input type="radio" id="dc" name="ct">
+  <label for="dc">Deep Cleaning</label><br>
+  <input type="radio" id="cc" name="ct">
+  <label for="cc">Commercial Cleaning</label><br>
+
+  <input type="checkbox" id="ecs">
+  <label for="ecs">Eco-Friendly/Allergen-Free Supplies</label><br>
+  <button onclick="calculate()">Calculate</button><br>
+  <p id="pr">Price Range:
+  <p>
+  <p id="tr">Time Range:
+  <p>
+    <script>
+      function calculate() {
+  var priceMin;
+  var priceMax;
+  var timeMin;
+  var timeMax;
+  if (document.getElementById('sr').checked == true) {
+    priceMin = 0.1;
+    priceMax = 0.25;
+    timeMin = 0.0005;
+    timeMax = 0.001;
+  } else if (document.getElementById('dc').checked == true) {
+    priceMin = 0.2;
+    priceMax = 0.5;
+    timeMin = 0.001;
+    timeMax = 0.0015;
+  } else if (document.getElementById('cc').checked == true){
+    priceMin = 0.05;
+    priceMax = 0.2;
+    timeMin = 0.0004;
+    timeMax = 0.0008;
+  } else {
+    return;
+  }
+  if (document.getElementById('ecs').checked == true) {
+    priceMin *= 1.1;
+    priceMax *= 1.1;
+  }
+  var sqft = document.getElementById('sqft').value;
+  var pr = "$" + Math.round(sqft*priceMin) + " - $" + Math.round(sqft*priceMax);
+  var tr = Math.round(sqft*timeMin) + " - " + Math.round(sqft*timeMax) + " hours";
+
+  document.getElementById('pr').innerHTML = "Price Range: " + pr;
+  document.getElementById('tr').innerHTML = "Time Range: " + tr;
+      }
+    </script>
+</body>
+
+</html>
